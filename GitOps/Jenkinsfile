@@ -36,18 +36,18 @@ pipeline {
                 script{
                     // Backend YAML update
                     def backendFile = readFile 'kubernetes/backend.yaml'
-                   backendFile = backendFile.replaceAll(
-                    /wanderlust-backend-beta:.*/,
-                 "wanderlust-backend-beta:${params.BACKEND_DOCKER_TAG}"
-              )
+                  backendFile = backendFile.replaceAll(
+    "wanderlust-backend-beta:.*",
+    "wanderlust-backend-beta:${params.BACKEND_DOCKER_TAG}"
+)
                     writeFile file: 'kubernetes/backend.yaml', text: backendFile
 
                     // Frontend YAML update
                     def frontendFile = readFile 'kubernetes/frontend.yaml'
                     frontendFile = frontendFile.replaceAll(
-                        'wanderlust-frontend-beta:.*',
-                        "wanderlust-frontend-beta:${params.FRONTEND_DOCKER_TAG}"
-                    )
+    "wanderlust-frontend-beta:.*",
+    "wanderlust-frontend-beta:${params.FRONTEND_DOCKER_TAG}"
+)
                     writeFile file: 'kubernetes/frontend.yaml', text: frontendFile
                 }
             }
