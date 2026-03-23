@@ -32,8 +32,7 @@ pipeline {
         stage('Git: Code Checkout') {
             steps {
                 script{
-                    code_checkout("https://github.com/LondheShubham153/Wanderlust-Mega-Project.git","main")
-                }
+                      code_checkout("https://github.com/Rashi228/wanderlust-project.git","main")                }
             }
         }
         
@@ -75,7 +74,7 @@ pipeline {
                     steps {
                         script{
                             dir("Automations"){
-                                sh "bash updatebackendnew.sh"
+                                  bat "bash updatebackendnew.sh"
                             }
                         }
                     }
@@ -85,7 +84,7 @@ pipeline {
                     steps {
                         script{
                             dir("Automations"){
-                                sh "bash updatefrontendnew.sh"
+                                bat "bash updatefrontendnew.sh"
                             }
                         }
                     }
@@ -97,11 +96,11 @@ pipeline {
             steps{
                 script{
                         dir('backend'){
-                            docker_build("wanderlust-backend-beta","${params.BACKEND_DOCKER_TAG}","trainwithshubham")
+                            docker_build("wanderlust-backend-beta","${params.BACKEND_DOCKER_TAG}","guptarashi228")
                         }
                     
                         dir('frontend'){
-                            docker_build("wanderlust-frontend-beta","${params.FRONTEND_DOCKER_TAG}","trainwithshubham")
+                            docker_build("wanderlust-frontend-beta","${params.FRONTEND_DOCKER_TAG}","guptarashi228")
                         }
                 }
             }
@@ -110,8 +109,8 @@ pipeline {
         stage("Docker: Push to DockerHub"){
             steps{
                 script{
-                    docker_push("wanderlust-backend-beta","${params.BACKEND_DOCKER_TAG}","trainwithshubham") 
-                    docker_push("wanderlust-frontend-beta","${params.FRONTEND_DOCKER_TAG}","trainwithshubham")
+                    docker_push("wanderlust-backend-beta","${params.BACKEND_DOCKER_TAG}","guptarashi228") 
+                    docker_push("wanderlust-frontend-beta","${params.FRONTEND_DOCKER_TAG}","guptarashi228")
                 }
             }
         }
